@@ -1,0 +1,155 @@
+[
+  {
+    "id": "largecap-category",
+    "scheme": "HDFC Large Cap Fund (formerly HDFC Top 100 Fund)",
+    "topic": "category, objective",
+    "text": "HDFC Large Cap Fund (formerly HDFC Top 100 Fund) is an open-ended equity scheme predominantly investing in large-cap stocks. It is positioned for wealth creation over a 3+ year investment horizon. Inception date: 11-Oct-1996.",
+    "source_name": "HDFC Mutual Fund - HDFC Large Cap Fund (Regular Plan) scheme page",
+    "source_url": "https://www.hdfcfund.com/product-solutions/overview/hdfc-top-100-fund/regular",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "largecap-benchmark-risk",
+    "scheme": "HDFC Large Cap Fund (formerly HDFC Top 100 Fund)",
+    "topic": "benchmark, riskometer",
+    "text": "The benchmark of HDFC Large Cap Fund is the NIFTY 100 (Total Return Index). Its riskometer level is 'Very High' — investors understand that their principal will be at very high risk.",
+    "source_name": "HDFC Mutual Fund - HDFC Large Cap Fund (Regular Plan) scheme page",
+    "source_url": "https://www.hdfcfund.com/product-solutions/overview/hdfc-top-100-fund/regular",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "largecap-sip-exit-ter",
+    "scheme": "HDFC Large Cap Fund (formerly HDFC Top 100 Fund)",
+    "topic": "minimum SIP, exit load, expense ratio",
+    "text": "Minimum SIP amount is Rs. 100. Exit load is 1.00% if units are redeemed/switched out within 1 year from the date of allotment, and nil after 1 year. The Total Expense Ratio (Regular Plan) is 1.57% (inclusive of GST on management fees). There is no lock-in.",
+    "source_name": "HDFC Mutual Fund - HDFC Large Cap Fund (Regular Plan) scheme page",
+    "source_url": "https://www.hdfcfund.com/product-solutions/overview/hdfc-top-100-fund/regular",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "flexicap-category",
+    "scheme": "HDFC Flexi Cap Fund",
+    "topic": "category, objective",
+    "text": "HDFC Flexi Cap Fund is an open-ended dynamic equity scheme investing across large-cap, mid-cap and small-cap stocks. It suits investors with a 5+ year horizon seeking diversified equity exposure. Inception date: 01-Jan-1995.",
+    "source_name": "HDFC Mutual Fund - HDFC Flexi Cap Fund (Regular Plan) scheme page",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/regular",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "flexicap-benchmark-risk",
+    "scheme": "HDFC Flexi Cap Fund",
+    "topic": "benchmark, riskometer",
+    "text": "The benchmark of HDFC Flexi Cap Fund is the NIFTY 500 (Total Returns Index). Its riskometer level is 'Very High'.",
+    "source_name": "HDFC Mutual Fund - HDFC Flexi Cap Fund (Regular Plan) scheme page",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/regular",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "flexicap-sip-exit-ter",
+    "scheme": "HDFC Flexi Cap Fund",
+    "topic": "minimum SIP, exit load, expense ratio",
+    "text": "Minimum SIP amount is Rs. 100. Exit load is 1.00% if units are redeemed/switched out within 1 year from the date of allotment, and nil after 1 year. The Total Expense Ratio (Regular Plan) is 1.37% (inclusive of GST on management fees). For the current plan-wise TER, refer to HDFC's Total Expense Ratio disclosure page.",
+    "source_name": "HDFC Mutual Fund - HDFC Flexi Cap Fund (Regular Plan) scheme page",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/regular",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "elss-category-lockin",
+    "scheme": "HDFC ELSS Tax Saver",
+    "topic": "category, lock-in, tax benefit",
+    "text": "HDFC ELSS Tax Saver is an open-ended equity linked savings scheme (ELSS) with a statutory lock-in of 3 years and a tax benefit. Investments qualify for deduction under Section 80C of the Income Tax Act, 1961 up to Rs. 1.5 lakh. It invests 80-100% in equity or equity-related instruments. Inception date: 31-Mar-1996.",
+    "source_name": "HDFC Mutual Fund - HDFC ELSS Tax Saver (Regular Plan) scheme page",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver/regular",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "elss-benchmark-risk",
+    "scheme": "HDFC ELSS Tax Saver",
+    "topic": "benchmark, riskometer",
+    "text": "The benchmark of HDFC ELSS Tax Saver is the NIFTY 500 (Total Returns Index). Its riskometer level is 'Very High'.",
+    "source_name": "HDFC Mutual Fund - HDFC ELSS Tax Saver (Regular Plan) scheme page",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver/regular",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "elss-sip-exit-ter",
+    "scheme": "HDFC ELSS Tax Saver",
+    "topic": "minimum SIP, exit load, expense ratio",
+    "text": "Minimum SIP and minimum lump-sum/application amount are both Rs. 500. Exit load is NIL (because units are subject to the 3-year statutory lock-in). The Total Expense Ratio (Regular Plan) is 1.77% (inclusive of GST on management fees).",
+    "source_name": "HDFC Mutual Fund - HDFC ELSS Tax Saver (Regular Plan) scheme page",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver/regular",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "midcap-category",
+    "scheme": "HDFC Mid Cap Fund (formerly HDFC Mid-Cap Opportunities Fund)",
+    "topic": "category, objective",
+    "text": "HDFC Mid Cap Fund (formerly HDFC Mid-Cap Opportunities Fund) is an open-ended equity scheme predominantly investing in mid-cap stocks, with a minimum 65% exposure to mid-cap securities. Inception date: 25-Jun-2007.",
+    "source_name": "HDFC Mutual Fund - HDFC Mid Cap Fund (Regular Plan) scheme page",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-mid-cap-fund/regular",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "midcap-benchmark-risk",
+    "scheme": "HDFC Mid Cap Fund (formerly HDFC Mid-Cap Opportunities Fund)",
+    "topic": "benchmark, riskometer",
+    "text": "The benchmark of HDFC Mid Cap Fund is the NIFTY Midcap 150 Index (Total Returns Index). Its riskometer level is 'Very High'.",
+    "source_name": "HDFC Mutual Fund - HDFC Mid Cap Fund (Regular Plan) scheme page",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-mid-cap-fund/regular",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "midcap-sip-exit-ter",
+    "scheme": "HDFC Mid Cap Fund (formerly HDFC Mid-Cap Opportunities Fund)",
+    "topic": "minimum SIP, exit load, expense ratio",
+    "text": "Minimum SIP amount and minimum lump-sum/application amount are both Rs. 100. Exit load is 1.00% if units are redeemed/switched out within 1 year from the date of allotment, and nil after 1 year. The Total Expense Ratio (Regular Plan) is 1.31% (inclusive of GST on management fees). There is no lock-in.",
+    "source_name": "HDFC Mutual Fund - HDFC Mid Cap Fund (Regular Plan) scheme page",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-mid-cap-fund/regular",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "concept-ter",
+    "scheme": "General (AMFI)",
+    "topic": "what is expense ratio / TER",
+    "text": "Total Expense Ratio (TER) is the collective operating cost of running and managing a mutual fund scheme — investment management fees, administrative, marketing, registrar, custodian and audit costs — expressed as a percentage of the fund's average net assets. The daily NAV is disclosed after deducting these expenses, so a lower TER means more of the return is retained by investors.",
+    "source_name": "AMFI - Knowledge Center: Expense Ratio",
+    "source_url": "https://www.amfiindia.com/investor/knowledge-center-info?zoneName=expenseRatio",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "concept-riskometer",
+    "scheme": "General (SEBI)",
+    "topic": "what is riskometer",
+    "text": "The Riskometer is a risk-measuring tool that depicts the risk level of a mutual fund scheme across six levels — Low, Low to Moderate, Moderate, Moderately High, High and Very High — each colour-coded. SEBI mandates asset management companies to display the Riskometer for their schemes.",
+    "source_name": "SEBI Investor - Understanding the Riskometer",
+    "source_url": "https://investor.sebi.gov.in/riskometer.html",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "concept-elss",
+    "scheme": "General (SEBI)",
+    "topic": "what is ELSS / lock-in",
+    "text": "An ELSS (Equity Linked Savings Scheme) is a mutual fund for tax savings under Section 80C, investing at least 80% of the corpus in equity and equity-related instruments. It has a 3-year lock-in period, the shortest among Section 80C tax-saving options, and allows tax deductions of up to Rs. 1.5 lakh per year.",
+    "source_name": "SEBI Investor - A Guide to ELSS",
+    "source_url": "https://investor.sebi.gov.in/elss.html",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "howto-cas",
+    "scheme": "General (HDFC)",
+    "topic": "how to download account statement",
+    "text": "To download a Consolidated Account Statement (CAS) from HDFC Mutual Fund: open the Download/Consolidated Account Statement page, enter your PAN or folio number, request an OTP, choose the financial year, and submit to receive the statement by email. There is no charge or fee for receiving or downloading your account statement.",
+    "source_name": "HDFC Mutual Fund - Consolidated Account Statement",
+    "source_url": "https://www.hdfcfund.com/services/consolidated-account-statement",
+    "last_updated": "2026-09-29"
+  },
+  {
+    "id": "howto-capgains",
+    "scheme": "General (HDFC)",
+    "topic": "how to download capital gains statement",
+    "text": "A capital gains statement can be obtained via the AMC website or via the registrars (RTAs) CAMS and KFintech: log in with your PAN and registered email, request a consolidated capital gains report, select the financial year, and receive it by email. Statements are typically available after the financial year ends (post-March) for ITR filing.",
+    "source_name": "HDFC Mutual Fund - How to get a capital gains statement",
+    "source_url": "https://www.hdfcfund.com/learn/blog/how-get-capital-gain-statement-mutual-fund-schemes-india",
+    "last_updated": "2026-09-29"
+  }
+]
