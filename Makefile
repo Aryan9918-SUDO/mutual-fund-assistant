@@ -23,6 +23,9 @@ check: lint typecheck cov eval  ## Run all quality gates (what CI runs)
 eval:           ## Run the evaluation harness (accuracy report)
 	python eval/run_eval.py
 
+check-gemini:   ## Verify your GEMINI_API_KEY works
+	python scripts/check_gemini.py
+
 run:            ## Launch the Streamlit UI
 	streamlit run app.py
 
