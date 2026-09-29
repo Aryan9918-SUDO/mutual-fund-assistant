@@ -47,19 +47,19 @@ def _generate_gemini(question: str, chunks: list[RetrievedChunk]) -> str | None:
     if not api_key:
         return None
     try:
-        import google.generativeai as genai
+        from google import genai
+        from google.genai import types
 
-        genai.configure(api_key=api_key)
-        model = genai.GenerativeModel(
-            config.GEMINI_MODEL, system_instruction=SYSTEM_INSTRUCTION
-        )
+        client = genai.Client(api_key=api_key)
         prompt = PROMPT_TEMPLATE.format(context=build_context(chunks), question=question)
-        resp = model.generate_content(
-            prompt,
-            generation_config={
-                "temperature": config.GEN_TEMPERATURE,
-                "max_output_tokens": config.GEN_MAX_TOKENS,
-            },
+        resp = client.models.generate_content(
+            model=config.GEMINI_MODEL,
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                system_instruction=SYSTEM_INSTRUCTION,
+                temperature=config.GEN_TEMPERATURE,
+                max_output_tokens=config.GEN_MAX_TOKENS,
+            ),
         )
         return (resp.text or "").strip() or None
     except Exception:

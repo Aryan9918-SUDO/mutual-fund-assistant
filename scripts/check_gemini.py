@@ -41,11 +41,12 @@ def main() -> int:
 
     print(f"🔑 Key found (…{key[-4:]}). Model: {config.GEMINI_MODEL}")
     try:
-        import google.generativeai as genai
+        from google import genai
 
-        genai.configure(api_key=key)
-        model = genai.GenerativeModel(config.GEMINI_MODEL)
-        resp = model.generate_content("Reply with exactly: OK")
+        client = genai.Client(api_key=key)
+        resp = client.models.generate_content(
+            model=config.GEMINI_MODEL, contents="Reply with exactly: OK"
+        )
         text = (resp.text or "").strip()
         print(f"✅ Gemini responded: {text!r}")
         print("   Integration works. Launch the app and answers will use Gemini phrasing.")
@@ -53,7 +54,7 @@ def main() -> int:
     except Exception as e:  # noqa: BLE001
         print(f"❌ Gemini call failed: {type(e).__name__}: {e}")
         print("   Common causes: wrong/expired key, billing/quota, or a bad model name.")
-        print("   Try a different model, e.g.  export GEMINI_MODEL=gemini-1.5-flash")
+        print("   Try a different model, e.g.  export GEMINI_MODEL=gemini-2.5-flash")
         return 1
 
 

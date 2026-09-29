@@ -26,7 +26,7 @@ MIN_SCORE = 0.25                               # below this => "not in my source
 TOPIC_BOOST = 0.12                             # lexical boost per topic-keyword match
 
 # --- Generation ----------------------------------------------------------------
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.0-flash")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
 MAX_SENTENCES = 3                              # answers stay <= 3 sentences
 GEN_TEMPERATURE = 0.1
 GEN_MAX_TOKENS = 220
@@ -50,7 +50,12 @@ EXAMPLE_QUESTIONS = [
 
 
 def get_gemini_api_key() -> str | None:
-    """Resolve the Gemini key from Streamlit secrets (if available) or the environment."""
+    """Resolve the Gemini key from Streamlit secrets (if available) or the environment.
+
+    Set MF_DISABLE_GEMINI=1 to force the deterministic extractive path (used in tests/eval).
+    """
+    if os.environ.get("MF_DISABLE_GEMINI") == "1":
+        return None
     try:
         import streamlit as st
 

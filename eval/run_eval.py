@@ -14,8 +14,14 @@ Gemini phrasing. Exits non-zero if routing accuracy drops below THRESHOLD (used 
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
+
+# Deterministic, free eval by default (retrieval/routing metrics don't depend on Gemini
+# phrasing). Set MF_EVAL_USE_GEMINI=1 to evaluate with live Gemini answers instead.
+if os.environ.get("MF_EVAL_USE_GEMINI") != "1":
+    os.environ["MF_DISABLE_GEMINI"] = "1"
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
