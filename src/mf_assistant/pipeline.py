@@ -67,7 +67,8 @@ class Pipeline:
         # --- Retrieval + answerability ---
         chunks = self.retriever.retrieve(q)
         top_score = chunks[0].score if chunks else 0.0
-        if not guardrails.in_domain(q) or not chunks or top_score < config.MIN_SCORE:
+        min_score = getattr(self.retriever, "min_score", config.MIN_SCORE)
+        if not guardrails.in_domain(q) or not chunks or top_score < min_score:
             return Answer(
                 AnswerKind.OUT_OF_SCOPE,
                 "I don't have that fact in my official sources. I currently cover HDFC Large "

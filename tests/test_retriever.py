@@ -5,7 +5,9 @@ from mf_assistant.retriever import get_retriever
 
 def test_backend_available():
     r = get_retriever()
-    assert r.name in {"embeddings+faiss", "tfidf"}
+    assert r.name in {
+        "hybrid(bm25+dense+rerank)", "hybrid(bm25+dense)", "embeddings+faiss", "tfidf"
+    }
 
 
 def test_expense_ratio_query_hits_ter_chunk():

@@ -20,7 +20,6 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from mf_assistant import answer_query  # noqa: E402
-from mf_assistant.models import AnswerKind  # noqa: E402
 
 EVAL_SET = Path(__file__).resolve().parent / "eval_set.json"
 THRESHOLD = 0.90  # CI fails if routing accuracy falls below this
@@ -74,9 +73,12 @@ def main() -> int:
     metrics = {
         "total_cases": n,
         "routing_accuracy": round(routing_acc, 3),
-        "retrieval_accuracy": round(retrieval_ok / retrieval_total, 3) if retrieval_total else None,
-        "refusal_accuracy": round(refusal_ok / refusal_total, 3) if refusal_total else None,
-        "grounded_citation_rate": round(citation_ok / citation_total, 3) if citation_total else None,
+        "retrieval_accuracy":
+            round(retrieval_ok / retrieval_total, 3) if retrieval_total else None,
+        "refusal_accuracy":
+            round(refusal_ok / refusal_total, 3) if refusal_total else None,
+        "grounded_citation_rate":
+            round(citation_ok / citation_total, 3) if citation_total else None,
     }
 
     print("=" * 60)

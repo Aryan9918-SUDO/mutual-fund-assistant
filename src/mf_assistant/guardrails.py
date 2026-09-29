@@ -6,7 +6,6 @@ trivially unit-testable.
 from __future__ import annotations
 
 import re
-from typing import Optional
 
 # 1) PII we must never accept or store. -----------------------------------------
 PII_PATTERNS = {
@@ -49,7 +48,7 @@ DOMAIN_TERMS = {
 }
 
 
-def detect_pii(text: str) -> Optional[str]:
+def detect_pii(text: str) -> str | None:
     """Return the first PII type found in the text, else None."""
     for label, pattern in PII_PATTERNS.items():
         if re.search(pattern, text, flags=re.IGNORECASE):

@@ -7,7 +7,6 @@ verbatim from the top chunk — so the app always works, even offline.
 from __future__ import annotations
 
 import re
-from typing import List, Optional
 
 from . import config
 from .models import RetrievedChunk
@@ -34,16 +33,16 @@ QUESTION: {question}
 Answer (<=3 sentences, facts only):"""
 
 
-def build_context(chunks: List[RetrievedChunk]) -> str:
+def build_context(chunks: list[RetrievedChunk]) -> str:
     return "\n\n".join(f"[{c.scheme} | {c.topic}] {c.text}" for c in chunks)
 
 
-def generate(question: str, chunks: List[RetrievedChunk]) -> str:
+def generate(question: str, chunks: list[RetrievedChunk]) -> str:
     """Return a grounded answer; Gemini if available, else extractive fallback."""
     return _generate_gemini(question, chunks) or extractive_answer(question, chunks)
 
 
-def _generate_gemini(question: str, chunks: List[RetrievedChunk]) -> Optional[str]:
+def _generate_gemini(question: str, chunks: list[RetrievedChunk]) -> str | None:
     api_key = config.get_gemini_api_key()
     if not api_key:
         return None
@@ -67,7 +66,7 @@ def _generate_gemini(question: str, chunks: List[RetrievedChunk]) -> Optional[st
         return None
 
 
-def extractive_answer(question: str, chunks: List[RetrievedChunk]) -> str:
+def extractive_answer(question: str, chunks: list[RetrievedChunk]) -> str:
     """Pick the sentences from the top chunk most relevant to the query (<=3)."""
     text = chunks[0].text
     # Split on sentence enders but not after the "Rs." abbreviation.

@@ -3,7 +3,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import List, Optional
 
 
 class AnswerKind(str, Enum):
@@ -37,11 +36,11 @@ class Answer:
 
     kind: AnswerKind
     text: str
-    source_name: Optional[str] = None
-    source_url: Optional[str] = None
-    last_updated: Optional[str] = None
-    confidence: Optional[float] = None
-    retrieved: List[RetrievedChunk] = field(default_factory=list)
+    source_name: str | None = None
+    source_url: str | None = None
+    last_updated: str | None = None
+    confidence: float | None = None
+    retrieved: list[RetrievedChunk] = field(default_factory=list)
 
     @property
     def is_refusal(self) -> bool:

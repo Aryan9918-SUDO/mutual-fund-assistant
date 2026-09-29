@@ -13,12 +13,16 @@ dependencies = [
     "scikit-learn>=1.3",
     "sentence-transformers>=2.6",
     "faiss-cpu>=1.7",
+    "rank-bm25>=0.2.2",
     "google-generativeai>=0.7",
     "numpy>=1.24",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "httpx>=0.27",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=7.4"]
+dev = ["pytest>=7.4", "pytest-cov>=4.1", "ruff>=0.4", "mypy>=1.9", "pre-commit>=3.6"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -26,3 +30,26 @@ where = ["src"]
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests", "eval"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4"]
+ignore = ["E402"]  # deliberate sys.path setup before imports in app.py/eval
+
+[tool.mypy]
+python_version = "3.10"
+files = ["src"]
+ignore_missing_imports = true      # third-party libs (faiss, sentence_transformers) ship no stubs
+warn_unused_ignores = true
+no_implicit_optional = true
+
+[tool.coverage.run]
+source = ["mf_assistant"]
+omit = ["*/api.py"]                # api covered by integration tests, not line-counted here
+
+[tool.coverage.report]
+show_missing = true

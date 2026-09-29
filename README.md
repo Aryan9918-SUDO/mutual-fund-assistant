@@ -7,14 +7,19 @@
 
 ![CI](https://github.com/USERNAME/mutual-fund-assistant/actions/workflows/ci.yml/badge.svg)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
-![Tests](https://img.shields.io/badge/tests-34%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-40%20passing-brightgreen)
+![Coverage](https://img.shields.io/badge/coverage-84%25-brightgreen)
 ![Eval](https://img.shields.io/badge/routing%20accuracy-100%25%20(31%20cases)-brightgreen)
+![Lint](https://img.shields.io/badge/ruff-passing-brightgreen)
+![Types](https://img.shields.io/badge/mypy-checked-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-informational)
 
 > Replace `USERNAME` in the badge/links above with your GitHub username after you push.
 
-**Stack:** Python · Streamlit · **sentence-transformers + FAISS** (semantic retrieval) ·
-**Google Gemini** (grounded generation) · pytest · GitHub Actions · Docker
+**Stack:** Python · **FastAPI** (REST backend) · Streamlit (client) ·
+**Hybrid retrieval — BM25 + dense embeddings (sentence-transformers + FAISS) fused with
+Reciprocal Rank Fusion + cross-encoder re-ranking** · **Google Gemini** (grounded generation) ·
+pytest · ruff · mypy · GitHub Actions · Docker / docker-compose
 
 | Ask (with cited answer + evidence) | Safe refusal |
 |---|---|
@@ -24,19 +29,23 @@
 
 ## ✨ Highlights (why this is more than a demo)
 
-- **Real semantic RAG** — queries are embedded with `all-MiniLM-L6-v2` and searched in a
-  **FAISS** index, so paraphrases work (*"cheapest way to start a monthly plan in mid cap"*
-  → finds the minimum-SIP fact) — not just keyword matching.
+- **Advanced hybrid RAG** — combines **BM25 (lexical)** and **dense embeddings**, fuses them
+  with **Reciprocal Rank Fusion**, then applies a **cross-encoder re-ranker** for precision.
+  Paraphrases work (*"cheapest way to start a monthly plan in mid cap"* → finds the min-SIP
+  fact) *and* the cross-encoder cleanly separates in-scope (~1.0) from out-of-scope (~0.0).
+- **REST API + client** — a **FastAPI** backend (`/ask`, `/compare`, `/health`, OpenAPI docs
+  at `/docs`) with the Streamlit UI as a client; run in-process or against the API.
 - **Safety guardrails** — deterministic classifiers refuse **advice**, **performance/returns**,
   and **PII** (PAN, Aadhaar, phone, email, OTP, folio) *before* any retrieval happens.
 - **Grounded & cited** — every factual answer shows exactly one official source + a
   "Sources I searched" evidence panel with similarity scores. **100% citation rate.**
 - **Evaluated** — a 31-case labelled eval set reports routing / retrieval / refusal /
   citation accuracy; **CI fails if routing accuracy drops below 90%.**
-- **Engineered like software** — clean `src/` package, 34 unit tests, typed data models,
-  Dockerfile, Makefile, GitHub Actions CI, privacy-safe query logging.
+- **Engineered like software** — clean `src/` package, **40 tests (84% coverage)**, typed
+  models, **ruff + mypy** gates, pre-commit hooks, Dockerfile + docker-compose, GitHub
+  Actions CI, privacy-safe query logging.
 - **Degrades gracefully** — works with **no API key** (extractive fallback) and falls back
-  from embeddings to TF-IDF if the model can't load. It never hard-crashes.
+  hybrid → dense → TF-IDF if a model can't load. It never hard-crashes.
 
 ## 📊 Evaluation results
 
@@ -61,13 +70,22 @@ flowchart TD
     G3 -- yes --> R3[Point to official factsheet]
     G3 -- no --> D{In domain?}
     D -- no --> R4[Not in my sources]
-    D -- yes --> RET[Semantic retrieval<br/>embeddings + FAISS + topic boost]
+    D -- yes --> RET[Hybrid retrieval<br/>BM25 + dense → RRF → cross-encoder rerank]
     RET --> SC{top score ≥ threshold?}
     SC -- no --> R4
     SC -- yes --> GEN[Gemini generation<br/>≤3 sentences, grounded]
     GEN -- fallback --> EX[Extractive answer]
     GEN --> OUT[Answer + 1 citation + confidence + evidence]
     EX --> OUT
+```
+
+The pipeline lives in `src/mf_assistant/` and is exposed **two ways**: the Streamlit UI and a
+FastAPI service — same logic, different transports.
+
+```
+Streamlit UI  ──in-process──▶  Pipeline  ◀──HTTP──  FastAPI (/ask /compare /health)
+                                   │
+              guardrails → hybrid retrieval → Gemini/extractive generation
 ```
 
 Maps to the three skills the milestone tests:
@@ -79,14 +97,16 @@ Maps to the three skills the milestone tests:
 
 ```
 mutual-fund-assistant/
-├─ app.py                        # Streamlit UI (thin presentation layer)
+├─ app.py                        # Streamlit UI (thin client; in-process or via API)
 ├─ src/mf_assistant/             # the library (all logic, importable & testable)
 │  ├─ config.py                  # central settings & paths
 │  ├─ models.py                  # typed Answer / RetrievedChunk / AnswerKind
 │  ├─ guardrails.py              # PII / advice / performance / domain detectors
-│  ├─ retriever.py               # EmbeddingRetriever (FAISS) + TfidfRetriever fallback
+│  ├─ retriever.py               # Hybrid (BM25+dense+RRF+rerank) / dense / TF-IDF backends
 │  ├─ generator.py               # Gemini generation + extractive fallback
 │  ├─ pipeline.py                # orchestrator: guardrails → retrieve → generate
+│  ├─ api.py                     # FastAPI backend (/ask, /compare, /health, /docs)
+│  ├─ schemas.py                 # Pydantic request/response models
 │  ├─ ingest.py                  # builds & persists the FAISS index (ETL step)
 │  └─ logging_util.py            # privacy-safe JSONL query logging
 ├─ data/
@@ -94,11 +114,29 @@ mutual-fund-assistant/
 │  ├─ sources.csv                # 22 official AMC/SEBI/AMFI URLs
 │  ├─ scheme_facts.json          # structured table for the Compare view
 │  └─ index/                     # persisted FAISS index + embeddings + meta
-├─ tests/                        # 34 pytest unit + integration tests
+├─ tests/                        # 40 pytest unit + integration + API tests
 ├─ eval/                         # labelled eval set + metrics harness
 ├─ scripts/screenshot.py         # regenerate README screenshots
-├─ Dockerfile · Makefile · .github/workflows/ci.yml
+├─ Dockerfile · docker-compose.yml · Makefile
+├─ .github/workflows/ci.yml · .pre-commit-config.yaml
 └─ requirements.txt · pyproject.toml
+```
+
+## 🔌 REST API
+
+Run `make api` (or `uvicorn mf_assistant.api:app --reload`) and open **http://localhost:8000/docs**.
+
+![API docs](docs/screenshots/api_docs.png)
+
+| Method | Path | Description |
+|---|---|---|
+| `POST` | `/ask` | Answer a factual query (or refuse), grounded in one cited source |
+| `GET` | `/compare` | Side-by-side factual comparison table for all schemes |
+| `GET` | `/health` | Liveness + active retriever backend + corpus size |
+
+```bash
+curl -X POST localhost:8000/ask -H 'Content-Type: application/json' \
+     -d '{"query": "exit load of HDFC Mid Cap Fund"}'
 ```
 
 ## 🎯 Scope (corpus)
@@ -127,15 +165,20 @@ pip install -e ".[dev]"        # or: pip install -r requirements.txt
 export GEMINI_API_KEY="your-key"
 
 make ingest                   # build the FAISS index (optional; app builds one at startup)
-make run                      # -> http://localhost:8501
+make run                      # Streamlit UI  -> http://localhost:8501
+make api                      # FastAPI docs  -> http://localhost:8000/docs
 ```
 
-Other commands: `make test` · `make eval` · `make docker-build` · `make docker-run`.
+Other commands: `make check` (lint + types + coverage + eval — what CI runs) ·
+`make test` · `make eval` · `make lint` · `make typecheck` · `make compose`.
 
 ### Run with Docker
 ```bash
 docker build -t mf-assistant .
 docker run -p 8501:8501 -e GEMINI_API_KEY=$GEMINI_API_KEY mf-assistant
+
+# or run the API + UI together:
+docker compose up --build      # UI :8501 (talks to API :8000)
 ```
 
 ### Deploy free on Streamlit Community Cloud
@@ -144,12 +187,15 @@ docker run -p 8501:8501 -e GEMINI_API_KEY=$GEMINI_API_KEY mf-assistant
 3. **Advanced → Secrets:** `GEMINI_API_KEY = "your-key"`.
 4. Deploy → share the `*.streamlit.app` URL as your working-prototype link.
 
-## 🧪 Testing & evaluation
+## 🧪 Testing, quality & evaluation
 
-- **Unit/integration:** `pytest -q` → 34 tests (guardrails, retrieval contract, pipeline
-  routing, privacy: PII never echoed).
+- **Tests:** `pytest --cov` → **40 tests, 84% coverage** (guardrails, retrieval contract,
+  pipeline routing, API endpoints, privacy: PII never echoed).
+- **Lint & types:** `ruff check` + `mypy` (both clean); `.pre-commit-config.yaml` runs them
+  on every commit.
 - **Eval harness:** `python eval/run_eval.py` prints the accuracy report and exits non-zero
-  if routing accuracy < 90% — wired into CI so regressions fail the build.
+  if routing accuracy < 90%.
+- **CI:** GitHub Actions runs lint → types → tests+coverage → eval on every push/PR.
 
 ## 🔒 Safety & privacy design
 

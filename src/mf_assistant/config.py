@@ -15,7 +15,13 @@ LOG_PATH = PROJECT_ROOT / "logs" / "queries.jsonl"
 
 # --- Retrieval -----------------------------------------------------------------
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
-TOP_K = 3                                       # chunks retrieved per query
+CROSS_ENCODER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+# "hybrid" (BM25 + dense + rerank) | "dense" (embeddings only) | "tfidf" (lexical only)
+RETRIEVAL_MODE = os.environ.get("MF_RETRIEVAL_MODE", "hybrid")
+USE_RERANKER = os.environ.get("MF_USE_RERANKER", "1") != "0"
+TOP_K = 3                                       # chunks returned per query
+CANDIDATE_K = 8                                # candidates before re-ranking
+RRF_K = 60                                     # reciprocal-rank-fusion constant
 MIN_SCORE = 0.25                               # below this => "not in my sources"
 TOPIC_BOOST = 0.12                             # lexical boost per topic-keyword match
 

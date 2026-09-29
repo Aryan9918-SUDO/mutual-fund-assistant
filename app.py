@@ -4,6 +4,7 @@ Thin presentation layer over the `mf_assistant` package: all logic (guardrails, 
 generation) lives in src/. This file only handles rendering and interaction.
 """
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -14,9 +15,17 @@ import streamlit as st
 
 from mf_assistant import Pipeline
 from mf_assistant.config import (
-    AMC_NAME, DISCLAIMER, EXAMPLE_QUESTIONS, SOURCES_LAST_UPDATED, get_gemini_api_key,
+    AMC_NAME,
+    DISCLAIMER,
+    EXAMPLE_QUESTIONS,
+    SOURCES_LAST_UPDATED,
+    get_gemini_api_key,
 )
-from mf_assistant.models import Answer, AnswerKind
+from mf_assistant.models import Answer, AnswerKind, RetrievedChunk
+
+# If MF_API_URL is set, the UI talks to the FastAPI backend instead of running the
+# pipeline in-process — demonstrating the same logic behind a REST boundary.
+API_URL = os.environ.get("MF_API_URL")
 
 SCHEME_FACTS = json.loads(
     (Path(__file__).resolve().parent / "data" / "scheme_facts.json").read_text("utf-8")
@@ -26,6 +35,26 @@ SCHEME_FACTS = json.loads(
 @st.cache_resource(show_spinner="Loading model & building index...")
 def get_pipeline() -> Pipeline:
     return Pipeline()
+
+
+def answer_query(query: str) -> Answer:
+    """Route through the REST API if configured, else the in-process pipeline."""
+    if API_URL:
+        import httpx
+
+        data = httpx.post(f"{API_URL.rstrip('/')}/ask", json={"query": query}, timeout=30).json()
+        return Answer(
+            kind=AnswerKind(data["kind"]), text=data["text"],
+            source_name=data.get("source_name"), source_url=data.get("source_url"),
+            last_updated=data.get("last_updated"), confidence=data.get("confidence"),
+            retrieved=[
+                RetrievedChunk(id="", scheme=c["scheme"], topic=c["topic"], text=c["text"],
+                               source_name="", source_url=c["source_url"],
+                               last_updated="", score=c["score"])
+                for c in data.get("retrieved", [])
+            ],
+        )
+    return get_pipeline().answer(query)
 
 
 def confidence_badge(conf: float | None) -> str:
@@ -89,7 +118,7 @@ def ask_tab() -> None:
     if prompt:
         with st.chat_message("user"):
             st.markdown(prompt)
-        ans = get_pipeline().answer(prompt)
+        ans = answer_query(prompt)
         with st.chat_message("assistant"):
             render_answer(ans)
         st.session_state["history"].append({"q": prompt, "a": ans})
@@ -132,7 +161,7 @@ def main() -> None:
         st.markdown(
             "**How it works**  \n"
             "1. Guardrails classify the query (advice / performance / PII).  \n"
-            "2. Semantic retrieval (embeddings + FAISS) finds the fact.  \n"
+            "2. Hybrid retrieval (BM25 + embeddings, re-ranked) finds the fact.  \n"
             "3. Gemini writes a ≤3-sentence answer, grounded in one cited source."
         )
         st.caption("Sources: official HDFC / SEBI / AMFI public pages only (`data/sources.csv`).")

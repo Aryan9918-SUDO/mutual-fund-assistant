@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  quality:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,8 +22,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e ".[dev]"
 
-      - name: Run unit tests
-        run: pytest -q
+      - name: Lint (ruff)
+        run: ruff check src tests eval app.py scripts
 
-      - name: Run evaluation harness (fails if routing accuracy < 90%)
+      - name: Type-check (mypy)
+        run: mypy
+
+      - name: Unit + integration tests (pytest + coverage)
+        run: pytest --cov --cov-report=term-missing
+
+      - name: Evaluation harness (fails if routing accuracy < 90%)
         run: python eval/run_eval.py

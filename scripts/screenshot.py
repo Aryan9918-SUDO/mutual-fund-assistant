@@ -11,9 +11,9 @@ OUT = Path(__file__).resolve().parents[1] / "docs" / "screenshots"
 OUT.mkdir(parents=True, exist_ok=True)
 BASE = "http://localhost:8601"
 
+_Q1 = "What%20is%20the%20expense%20ratio%20of%20HDFC%20Flexi%20Cap%20Fund%3F"
 SHOTS = [
-    ("answer.png", f"{BASE}/?q=What%20is%20the%20expense%20ratio%20of%20HDFC%20Flexi%20Cap%20Fund%3F",
-     "text=Total Expense Ratio"),
+    ("answer.png", f"{BASE}/?q={_Q1}", "text=Total Expense Ratio"),
     ("refusal.png", f"{BASE}/?q=Should%20I%20buy%20HDFC%20Flexi%20Cap%20Fund%3F",
      "text=facts-only assistant"),
     ("landing.png", BASE, "text=Facts-Only MF Assistant"),
