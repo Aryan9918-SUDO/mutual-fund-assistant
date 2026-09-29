@@ -5,7 +5,7 @@
 > (AMC / SEBI / AMFI). Every answer carries **one citation**. It refuses advice, never makes
 > performance claims, and never accepts or stores personal data.
 
-![CI](https://github.com/USERNAME/mutual-fund-assistant/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/Aryan9918-SUDO/mutual-fund-assistant/actions/workflows/ci.yml/badge.svg)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![Tests](https://img.shields.io/badge/tests-40%20passing-brightgreen)
 ![Coverage](https://img.shields.io/badge/coverage-84%25-brightgreen)
@@ -14,7 +14,7 @@
 ![Types](https://img.shields.io/badge/mypy-checked-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-informational)
 
-> Replace `USERNAME` in the badge/links above with your GitHub username after you push.
+**Author:** Aryan Kumar Singh ([@Aryan9918-SUDO](https://github.com/Aryan9918-SUDO))
 
 **Stack:** Python · **FastAPI** (REST backend) · Streamlit (client) ·
 **Hybrid retrieval — BM25 + dense embeddings (sentence-transformers + FAISS) fused with
@@ -157,7 +157,7 @@ all 22 URLs: [`data/sources.csv`](data/sources.csv) (also listed at the bottom).
 ## 🚀 Quickstart
 
 ```bash
-git clone https://github.com/USERNAME/mutual-fund-assistant.git
+git clone https://github.com/Aryan9918-SUDO/mutual-fund-assistant.git
 cd mutual-fund-assistant
 pip install -e ".[dev]"        # or: pip install -r requirements.txt
 
