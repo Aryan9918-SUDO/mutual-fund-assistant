@@ -20,7 +20,7 @@
   {
     "id": "largecap-sip-exit-ter",
     "scheme": "HDFC Large Cap Fund (formerly HDFC Top 100 Fund)",
-    "topic": "minimum SIP, exit load, expense ratio",
+    "topic": "minimum SIP, monthly investment plan, exit load, expense ratio",
     "text": "Minimum SIP amount is Rs. 100. Exit load is 1.00% if units are redeemed/switched out within 1 year from the date of allotment, and nil after 1 year. The Total Expense Ratio (Regular Plan) is 1.57% (inclusive of GST on management fees). There is no lock-in.",
     "source_name": "HDFC Mutual Fund - HDFC Large Cap Fund (Regular Plan) scheme page",
     "source_url": "https://www.hdfcfund.com/product-solutions/overview/hdfc-top-100-fund/regular",
@@ -47,7 +47,7 @@
   {
     "id": "flexicap-sip-exit-ter",
     "scheme": "HDFC Flexi Cap Fund",
-    "topic": "minimum SIP, exit load, expense ratio",
+    "topic": "minimum SIP, monthly investment plan, exit load, expense ratio",
     "text": "Minimum SIP amount is Rs. 100. Exit load is 1.00% if units are redeemed/switched out within 1 year from the date of allotment, and nil after 1 year. The Total Expense Ratio (Regular Plan) is 1.37% (inclusive of GST on management fees). For the current plan-wise TER, refer to HDFC's Total Expense Ratio disclosure page.",
     "source_name": "HDFC Mutual Fund - HDFC Flexi Cap Fund (Regular Plan) scheme page",
     "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/regular",
@@ -74,7 +74,7 @@
   {
     "id": "elss-sip-exit-ter",
     "scheme": "HDFC ELSS Tax Saver",
-    "topic": "minimum SIP, exit load, expense ratio",
+    "topic": "minimum SIP, monthly investment plan, exit load, expense ratio",
     "text": "Minimum SIP and minimum lump-sum/application amount are both Rs. 500. Exit load is NIL (because units are subject to the 3-year statutory lock-in). The Total Expense Ratio (Regular Plan) is 1.77% (inclusive of GST on management fees).",
     "source_name": "HDFC Mutual Fund - HDFC ELSS Tax Saver (Regular Plan) scheme page",
     "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver/regular",
@@ -101,7 +101,7 @@
   {
     "id": "midcap-sip-exit-ter",
     "scheme": "HDFC Mid Cap Fund (formerly HDFC Mid-Cap Opportunities Fund)",
-    "topic": "minimum SIP, exit load, expense ratio",
+    "topic": "minimum SIP, monthly investment plan, exit load, expense ratio",
     "text": "Minimum SIP amount and minimum lump-sum/application amount are both Rs. 100. Exit load is 1.00% if units are redeemed/switched out within 1 year from the date of allotment, and nil after 1 year. The Total Expense Ratio (Regular Plan) is 1.31% (inclusive of GST on management fees). There is no lock-in.",
     "source_name": "HDFC Mutual Fund - HDFC Mid Cap Fund (Regular Plan) scheme page",
     "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-mid-cap-fund/regular",

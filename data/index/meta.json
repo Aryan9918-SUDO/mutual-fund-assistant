@@ -1,0 +1,25 @@
+{
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "dim": 384,
+  "num_chunks": 17,
+  "chunk_ids": [
+    "largecap-category",
+    "largecap-benchmark-risk",
+    "largecap-sip-exit-ter",
+    "flexicap-category",
+    "flexicap-benchmark-risk",
+    "flexicap-sip-exit-ter",
+    "elss-category-lockin",
+    "elss-benchmark-risk",
+    "elss-sip-exit-ter",
+    "midcap-category",
+    "midcap-benchmark-risk",
+    "midcap-sip-exit-ter",
+    "concept-ter",
+    "concept-riskometer",
+    "concept-elss",
+    "howto-cas",
+    "howto-capgains"
+  ],
+  "last_updated": "2026-09-29"
+}

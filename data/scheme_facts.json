@@ -1,0 +1,49 @@
+{
+  "columns": ["Category", "Benchmark", "Riskometer", "Min SIP", "Exit load", "Lock-in", "TER (Regular)", "Inception"],
+  "schemes": {
+    "HDFC Large Cap Fund": {
+      "Category": "Large Cap",
+      "Benchmark": "NIFTY 100 TRI",
+      "Riskometer": "Very High",
+      "Min SIP": "Rs. 100",
+      "Exit load": "1% within 1 yr, else nil",
+      "Lock-in": "None",
+      "TER (Regular)": "1.57%",
+      "Inception": "11-Oct-1996",
+      "source_url": "https://www.hdfcfund.com/product-solutions/overview/hdfc-top-100-fund/regular"
+    },
+    "HDFC Flexi Cap Fund": {
+      "Category": "Flexi Cap",
+      "Benchmark": "NIFTY 500 TRI",
+      "Riskometer": "Very High",
+      "Min SIP": "Rs. 100",
+      "Exit load": "1% within 1 yr, else nil",
+      "Lock-in": "None",
+      "TER (Regular)": "1.37%",
+      "Inception": "01-Jan-1995",
+      "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/regular"
+    },
+    "HDFC ELSS Tax Saver": {
+      "Category": "ELSS (tax saver)",
+      "Benchmark": "NIFTY 500 TRI",
+      "Riskometer": "Very High",
+      "Min SIP": "Rs. 500",
+      "Exit load": "Nil",
+      "Lock-in": "3 years",
+      "TER (Regular)": "1.77%",
+      "Inception": "31-Mar-1996",
+      "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver/regular"
+    },
+    "HDFC Mid Cap Fund": {
+      "Category": "Mid Cap",
+      "Benchmark": "NIFTY Midcap 150 TRI",
+      "Riskometer": "Very High",
+      "Min SIP": "Rs. 100",
+      "Exit load": "1% within 1 yr, else nil",
+      "Lock-in": "None",
+      "TER (Regular)": "1.31%",
+      "Inception": "25-Jun-2007",
+      "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-mid-cap-fund/regular"
+    }
+  }
+}
