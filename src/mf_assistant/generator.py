@@ -7,6 +7,7 @@ verbatim from the top chunk — so the app always works, even offline.
 from __future__ import annotations
 
 import re
+import time
 
 from . import config
 from .models import RetrievedChunk
@@ -43,27 +44,44 @@ def generate(question: str, chunks: list[RetrievedChunk]) -> str:
 
 
 def _generate_gemini(question: str, chunks: list[RetrievedChunk]) -> str | None:
+    """Call Gemini; return None (→ extractive fallback) on any failure or truncation.
+
+    Retries once on transient errors (e.g. 503 high-demand). A non-STOP finish reason
+    (truncated / safety-blocked) is discarded so we never show a half-sentence answer.
+    """
     api_key = config.get_gemini_api_key()
     if not api_key:
         return None
     try:
         from google import genai
         from google.genai import types
-
-        client = genai.Client(api_key=api_key)
-        prompt = PROMPT_TEMPLATE.format(context=build_context(chunks), question=question)
-        resp = client.models.generate_content(
-            model=config.GEMINI_MODEL,
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                system_instruction=SYSTEM_INSTRUCTION,
-                temperature=config.GEN_TEMPERATURE,
-                max_output_tokens=config.GEN_MAX_TOKENS,
-            ),
-        )
-        return (resp.text or "").strip() or None
     except Exception:
         return None
+
+    client = genai.Client(api_key=api_key)
+    prompt = PROMPT_TEMPLATE.format(context=build_context(chunks), question=question)
+    cfg = types.GenerateContentConfig(
+        system_instruction=SYSTEM_INSTRUCTION,
+        temperature=config.GEN_TEMPERATURE,
+        max_output_tokens=config.GEN_MAX_TOKENS,
+    )
+
+    for attempt in range(2):  # one retry for transient (e.g. 503) errors
+        try:
+            resp = client.models.generate_content(
+                model=config.GEMINI_MODEL, contents=prompt, config=cfg
+            )
+            cands = resp.candidates or []
+            finish = getattr(cands[0], "finish_reason", None) if cands else None
+            if getattr(finish, "name", str(finish)) not in ("STOP", "None"):
+                return None  # truncated/blocked -> use the clean extractive answer
+            return (resp.text or "").strip() or None
+        except Exception:
+            if attempt == 0:
+                time.sleep(1.0)
+                continue
+            return None
+    return None
 
 
 def extractive_answer(question: str, chunks: list[RetrievedChunk]) -> str:

@@ -29,7 +29,7 @@ TOPIC_BOOST = 0.12                             # lexical boost per topic-keyword
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
 MAX_SENTENCES = 3                              # answers stay <= 3 sentences
 GEN_TEMPERATURE = 0.1
-GEN_MAX_TOKENS = 220
+GEN_MAX_TOKENS = 800   # Gemini 3.x "thinking" shares this budget, so keep it generous
 
 # --- Corpus metadata -----------------------------------------------------------
 SOURCES_LAST_UPDATED = "2026-09-29"
